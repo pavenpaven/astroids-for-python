@@ -1,0 +1,7 @@
+#!/bin/bash
+
+sudo apt-get install python3 -yy
+sudo apt-get install python3-pip -yy
+pip3 install pygame
+sudo mv astroid.py   
+exit
