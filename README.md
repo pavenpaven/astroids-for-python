@@ -1,5 +1,7 @@
 # astroids-for-python
 
+to initialize the program type astroid_initialize
+
 use the bash script astroids_game
 
 licence:
