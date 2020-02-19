@@ -1,4 +1,5 @@
 # astroids-for-python
+beta 1.1
 
 to initialize the program type astroid_initialize
 
