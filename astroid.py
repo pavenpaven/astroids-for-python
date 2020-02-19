@@ -171,7 +171,7 @@ spam = 20
 
 shots = []
 
-speed_of_bullet = 5
+speed_of_bullet = 20
 
 bullet_size = 6
 
@@ -196,6 +196,10 @@ def render_shot():
 
       pygame.draw.rect(window, (255, 0, 0), (x, y, bullet_size, bullet_size))
 
+def despawn_bullets():
+  for i in shots:
+    
+      
 #screens
 
 def game_over():
