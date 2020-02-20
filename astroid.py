@@ -193,7 +193,7 @@ def render_shot():
       shots[i][0] = x
       shots[i][1] = y
       i += 1
-
+      despawn_bullets()
       pygame.draw.rect(window, (255, 0, 0), (x, y, bullet_size, bullet_size))
 
 def despawn_bullets():
