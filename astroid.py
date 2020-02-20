@@ -197,7 +197,13 @@ def render_shot():
       pygame.draw.rect(window, (255, 0, 0), (x, y, bullet_size, bullet_size))
 
 def despawn_bullets():
+  n=0
   for i in shots:
+     if i[0]<0 or i[0]>screen_size[0]*tile or i[1]<0 or i[1]>screen_size[1]*tile:
+        del shots[n] 
+     n+=1
+        
+        
     
       
 #screens
