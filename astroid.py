@@ -2,7 +2,21 @@ import pygame
 import math
 import random
 
-#hah
+#map
+
+class World:
+  def __init__(self):
+    self.world_perspective=(3, 2)
+    self.world_scaler=300
+    self.world_true_size= self.world_perspective[0] * self.world_scaler, self.world_perspective[1] * self.world_scaler
+  def convert_to_screen(pos):
+    return [pos[0]-screen_pos[0]), pos[1]-screen_pos[1]]
+  def change_pos(pos, change):
+    return [pos[0]+chane[0], pos[1]+change[1]]
+    
+world=World()
+
+  
 
 #graphics
 tile = 250
@@ -12,6 +26,7 @@ screen_size = (3, 2)
 player_size = 30
 
 window=pygame.display.set_mode((screen_size[0]*tile, screen_size[1]*tile))
+    
 
 def player_render():
   x=(math.sin(jack.angle-0.25)*player_size+jack.x, math.cos(jack.angle-0.25)*player_size+jack.y)
@@ -36,15 +51,17 @@ def graphics():
 
 astroid_hitbox = 50
 
+
+
 astroids = []
 
 def render_astroid():
     k=0
     for i in astroids:
-        x= i[0]+i[2][0]/10*speed
-        y= i[1]+i[2][1]/10*speed
+        #x= i[0]+i[2][0]/10*speed
+        #y= i[1]+i[2][1]/10*speed
 
-        pos=warp(x, y)
+        pos=warp(astroid[k][0], astroid[k][1])
 
         astroids[k][0]=pos[0]
         astroids[k][1]=pos[1]
@@ -74,7 +91,6 @@ def spawn_astroid():
     astroids.append([x, y, vol])
 
 #key presses
-
 
 class Player:
     def __init__(self, x, y, vol, angle):
@@ -215,6 +231,7 @@ def game_over():
 
 #main loop
 diff = 500
+screen_pos=[0, 0];
 
 def main_loop():
     j = False
@@ -228,10 +245,12 @@ def main_loop():
     while game:
         clock.tick(60)
         framecount+=1
+        screen_pos=[jack.x-((screen_size[0]*tile)/2), jack.y-((screen_size[1]*tile)/2)]
+        world.change_pos
         j=check_keys(framecount, j)
         move_player()
         graphics()
-        print(clock.get_fps())
+        print(clock.get_fps()) 
         player_hitbox = ((jack.x - 30, jack.y - 30), (jack.x + 30, jack.y + 30))
         game = player_collition(player_hitbox)
         shot_collition()
