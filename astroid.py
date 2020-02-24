@@ -2,8 +2,35 @@ import pygame
 import math
 import random
 
-#hah
+#object
 
+class object:
+  def __init__(self, hit_box, texture_path):
+    self.positions=[]
+    self.vol=[]
+    self.texture=texture_path
+    self.hit_box=hit_box
+    
+  def render(self, index):
+        pos = self.position[index]
+        vol = self.vol[index]
+        
+        #new_pos is just a varebal for makeing the code look better. spoiler alert it doesent help
+        new_pos=[]
+        
+       
+        new_pos = pos[0] + vol[0] / 10 #the 10 is a dum konstant i should have a konstant for it
+        new_pos = pos[1] + vol[1] / 10
+
+        new_pos=warp(new_pos[0], new_pos[1])
+
+        self.position[index][0]=new_pos[0]
+        self.position[index][1]=new_pos[1]
+         
+        pygame.draw.rect(window, (0, 255, 0), (pos[0], pos[1], self.hit_box, self.hit_box))
+        k += 1    
+
+    
 #graphics
 tile = 250
 
@@ -30,29 +57,17 @@ def graphics():
     render_shot()
     pygame.display.update()
 
-#
 
-#astrodise
+#astroid
 
-astroid_hitbox = 50
-
-astroids = []
-
-def render_astroid():
-    k=0
-    for i in astroids:
-        x= i[0]+i[2][0]/10*speed
-        y= i[1]+i[2][1]/10*speed
-
-        pos=warp(x, y)
-
-        astroids[k][0]=pos[0]
-        astroids[k][1]=pos[1]
-         
-        pygame.draw.rect(window, (0, 255, 0), (pos[0], pos[1], astroid_hitbox, astroid_hitbox))
-        k += 1
-
-def spawn_astroid():
+class Astroid:
+  
+  def __init__(self, texture, hit_box):
+    self.objects = object(texture, hit_box)
+  
+  def spawn():
+    
+    #cous is just a random number that tell which side the astroid shall spawn
     cous=random.randint(0,3)
     if cous==0:
       x=0
@@ -71,7 +86,10 @@ def spawn_astroid():
       x = random.randint(20,tile * screen_size[1]-20)
       vol = (random.randint(0, 20)-10, random.randint(0, 10)-10)
     
-    astroids.append([x, y, vol])
+    self.object.position.append([x, y])
+    self.object.vol.append(vol)
+
+astroids=Astroid("yee", 10)
 
 #key presses
 
@@ -116,9 +134,6 @@ def calculate_vol(x,framecount):
     jack.vol = (jack.vol[0]+anglevector[0]/4, jack.vol[1]+anglevector[1]/4)
 
 #move
-
-
-speed = 1
 
 
 def warp(x,y):
@@ -221,7 +236,7 @@ def main_loop():
     clock = pygame.time.Clock()
     framecount=0
     for i in range(1):
-        spawn_astroid()
+        astroids.spawn()
     game = True
     astro=3
     chance=1000
